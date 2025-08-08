@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-restricted-imports */
 import { isDarwin } from "./constants";
 
 import type { ValueOf } from "./utility-types";

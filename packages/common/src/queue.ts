@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-restricted-imports */
 import { promiseTry, resolvablePromise } from ".";
 
 import type { ResolvablePromise } from ".";

@@ -70,10 +70,27 @@ import type {
   ExcalidrawFreeDrawElement,
   ElementsMap,
   ExcalidrawLineElement,
+  BezierHandle,
 } from "./types";
 
 import type { Drawable, Options } from "roughjs/bin/core";
 import type { Point as RoughPoint } from "roughjs/bin/geometry";
+
+export const generateCubicBezierPath = (
+  points: readonly LocalPoint[],
+  handles: readonly BezierHandle[],
+) => {
+  if (points.length === 0) {
+    return "";
+  }
+  let d = `M${points[0][0]} ${points[0][1]}`;
+  for (let i = 0; i < handles.length && i < points.length - 1; i++) {
+    const [cp1, cp2] = handles[i];
+    const [x, y] = points[i + 1];
+    d += ` C${cp1[0]} ${cp1[1]} ${cp2[0]} ${cp2[1]} ${x} ${y}`;
+  }
+  return d;
+};
 
 export class ShapeCache {
   private static rg = new RoughGenerator();
@@ -749,6 +766,13 @@ const generateElementShape = (
             ),
           ];
         }
+      } else if (element.controlHandles && element.controlHandles.length > 0) {
+        shape = [
+          generator.path(
+            generateCubicBezierPath(points, element.controlHandles),
+            options,
+          ),
+        ];
       } else if (!element.roundness) {
         // curve is always the first element
         // this simplifies finding the curve for an element

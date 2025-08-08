@@ -23,10 +23,12 @@ jobs:
         with:
           node-version: 20
           cache: yarn
+      - run: corepack enable
       - run: yarn install --frozen-lockfile
       - run: yarn build
         env:
           VERCEL_GIT_COMMIT_SHA: ${{ github.sha }}
+      - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
           path: excalidraw-app/build

@@ -342,6 +342,9 @@ const restoreElement = (
         points,
         x,
         y,
+        ...("controlHandles" in element && element.controlHandles
+          ? { controlHandles: element.controlHandles }
+          : {}),
         ...(isLineElement(element)
           ? {
               polygon: isValidPolygon(element.points)
@@ -376,6 +379,9 @@ const restoreElement = (
         x,
         y,
         elbowed: (element as ExcalidrawArrowElement).elbowed,
+        ...("controlHandles" in element && element.controlHandles
+          ? { controlHandles: element.controlHandles }
+          : {}),
         ...getSizeFromPoints(points),
       } as const;
 

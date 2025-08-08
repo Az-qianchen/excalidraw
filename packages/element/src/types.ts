@@ -318,6 +318,8 @@ export type Arrowhead =
   | "crowfoot_many"
   | "crowfoot_one_or_many";
 
+export type BezierHandle = readonly [LocalPoint, LocalPoint];
+
 export type ExcalidrawLinearElement = _ExcalidrawElementBase &
   Readonly<{
     type: "line" | "arrow";
@@ -327,6 +329,8 @@ export type ExcalidrawLinearElement = _ExcalidrawElementBase &
     endBinding: PointBinding | null;
     startArrowhead: Arrowhead | null;
     endArrowhead: Arrowhead | null;
+    /** Cubic bezier control handles for each segment */
+    controlHandles?: readonly BezierHandle[];
   }>;
 
 export type ExcalidrawLineElement = ExcalidrawLinearElement &

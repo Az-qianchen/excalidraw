@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-restricted-imports */
 import { average } from "@excalidraw/math";
 
 import type {

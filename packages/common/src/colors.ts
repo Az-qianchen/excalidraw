@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-restricted-imports */
 import oc from "open-color";
 
 import type { Merge } from "./utility-types";
